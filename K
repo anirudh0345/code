@@ -1,0 +1,33 @@
+create database mall4;
+use mall4;
+
+SET FOREIGN_KEY_CHECKS=0;
+
+create table MALL(name_mall varchar(30), address varchar(40), primary key(name_mall));
+create table OWNER_TABLE(owner_name varchar(30), address varchar(40), office_ph_no int, primary key(owner_name));
+create table EMPLOYEE(emp_ssn int, emp_name varchar(30), salary int, dept_no int, supervisor_ssn int, primary key(emp_ssn), foreign key(supervisor_ssn) references EMPLOYEE(emp_ssn));
+create table DEPARTMENT(dept_no int, dept_name varchar(30), manager_ssn int, store_no int, primary key(dept_no), foreign key(manager_ssn) references EMPLOYEE(emp_ssn));
+create table STORES(store_no int, store_name varchar(30), room_no int, manager_name varchar(30), manager_ssn int, owner_name varchar(30), primary key(store_no), foreign key(owner_name) references OWNER_TABLE(owner_name), foreign key(manager_ssn) references EMPLOYEE(emp_ssn));
+alter table EMPLOYEE add foreign key(dept_no) references DEPARTMENT(dept_no);
+
+insert into MALL values("forum","koramangala");
+insert into MALL values("orion","rajajinagar");
+insert into MALL values("pheonix","white field");
+
+insert into OWNER_TABLE values("arnavps","basavangudi",901950);
+insert into OWNER_TABLE values("pep guardiola","manchester city",901956);
+insert into OWNER_TABLE values("ronaldo","finished",924307);
+
+insert into DEPARTMENT values(5,'fitness',355,1001);
+insert into DEPARTMENT values(6,'football',340,1002);
+insert into DEPARTMENT values(7,'electronics',342,1003);
+
+
+insert into EMPLOYEE values(101,'mbappe',10000,5,102);
+insert into EMPLOYEE values(102,'messi',20000,7,101);
+insert into EMPLOYEE values(103,'neymar',10000,5,103);
+
+
+insert into STORES values(55,'dbrand',69,"mkbhd",333,"de bruyne");
+insert into STORES values(56,'gap',70,"arnault",334,"di caprio");
+insert into STORES values(57,'stratton oakmont',71,"jordan belfort",335,"tom hanks");
